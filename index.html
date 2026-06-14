@@ -128,13 +128,152 @@ class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text
 </div>
 </section>
 <section id="pantalla-calendario" class="p-4 max-w-md mx-auto space-y-4 hidden">
-<header class="pt-4">
-<h1 class="text-2xl font-bold text-slate-900">Calendario de Exámenes</h1>
-<p class="text-xs text-slate-500">Cronograma ordenado de entregas y parciales.</p>
-</header>
-<div class="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center text-slate-400 text-sm">
-[Espacio asignado al Integrante 3 para la agenda de exámenes]
-</div>
+
+    <header class="pt-4">
+        <h1 class="text-2xl font-bold text-slate-900">Calendario de Exámenes</h1>
+        <p class="text-xs text-slate-500">Cronograma ordenado de entregas y parciales.</p>
+    </header>
+
+    <div class="space-y-4">
+
+        <!-- JUNIO -->
+
+        <div class="flex items-center gap-3">
+            <div class="h-px flex-1 bg-slate-300"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">
+                Junio 2026
+            </span>
+            <div class="h-px flex-1 bg-slate-300"></div>
+        </div>
+
+        <!-- Tarjeta 1 -->
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+
+            <div class="flex gap-4">
+
+                <div class="text-center min-w-[60px]">
+                    <p class="text-xs text-slate-500 uppercase">Jun</p>
+                    <p class="text-3xl font-bold text-slate-900">16</p>
+                </div>
+
+                <div class="flex-1">
+                    <span class="inline-block bg-red-100 text-red-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
+                        Parcial
+                    </span>
+
+                    <h3 class="font-semibold text-slate-900">
+                        Arquitectura y Diseño de Interfaces
+                    </h3>
+
+                    <p class="mt-1 text-xs text-slate-500">
+                        🕘 09:00 hs • Sala de Computacion
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Tarjeta 2 -->
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+
+            <div class="flex gap-4">
+
+                <div class="text-center min-w-[60px]">
+                    <p class="text-xs text-slate-500 uppercase">Jun</p>
+                    <p class="text-3xl font-bold text-slate-900">23</p>
+                </div>
+
+                <div class="flex-1">
+                    <span class="inline-block bg-orange-100 text-orange-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
+                        TP
+                    </span>
+
+                    <h3 class="font-semibold text-slate-900">
+                        Entrega Proyecto Integrador
+                    </h3>
+
+                    <p class="mt-1 text-xs text-slate-500">
+                        🕘 23:59 hs • Campus Virtual
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- JULIO -->
+
+        <div class="flex items-center gap-3">
+            <div class="h-px flex-1 bg-slate-300"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">
+                Julio 2026
+            </span>
+            <div class="h-px flex-1 bg-slate-300"></div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+
+            <div class="flex gap-4">
+
+                <div class="text-center min-w-[60px]">
+                    <p class="text-xs text-slate-500 uppercase">Jul</p>
+                    <p class="text-3xl font-bold text-slate-900">03</p>
+                </div>
+
+                <div class="flex-1">
+                    <span class="inline-block bg-emerald-100 text-emerald-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
+                        Final
+                    </span>
+
+                    <h3 class="font-semibold text-slate-900">
+                        Inglés Técnico
+                    </h3>
+
+                    <p class="mt-1 text-xs text-slate-500">
+                        🕘 18:30 hs • Aula 3
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Tarjeta 4 -->
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+
+            <div class="flex gap-4">
+
+                <div class="text-center min-w-[60px]">
+                    <p class="text-xs text-slate-500 uppercase">Jul</p>
+                    <p class="text-3xl font-bold text-slate-900">11</p>
+                </div>
+
+                <div class="flex-1">
+                    <span class="inline-block bg-red-100 text-red-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
+                        Parcial
+                    </span>
+
+                    <h3 class="font-semibold text-slate-900">
+                        Base de Datos
+                    </h3>
+
+                    <p class="mt-1 text-xs text-slate-500">
+                        🕘 10:00 hs • Aula 3
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-xl px-6 py-2 flex justify-around max-w-md mx-auto z-50">
 <button onclick="navegarA('pantalla-home', this)" class="flex flex-col items-center text-blue-600 font-medium text-xs space-y-0.5 nav-btn flex-1">
