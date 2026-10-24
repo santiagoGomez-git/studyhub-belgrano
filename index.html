@@ -1,327 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudyHub Belgrano - Prototipo</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-body { font-family: 'Inter', sans-serif; }
-/* Oculta la barra de scroll pero mantiene la funcionalidad de deslizar en los filtros */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHub Belgrano - MVC & Responsive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen pb-24 select-none">
-<section id="pantalla-home" class="p-4 max-w-md mx-auto space-y-6">
-<header class="flex items-center justify-between pt-4">
-<div>
-<span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">¡Hola, desarrollador!</span>
-<h1 class="text-2xl font-bold text-slate-900">StudyHub Belgrano</h1>
-</div>
-<span class="material-symbols-outlined text-slate-700 text-3xl">account_circle</span>
-</header>
-<article class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 space-y-3">
-<div class="flex items-center gap-2 text-red-600">
-<span class="material-symbols-outlined text-xl">notification_important</span>
-<h2 class="font-semibold text-sm uppercase tracking-wide">Alertas importantes</h2>
-</div>
-<div class="space-y-2">
-<div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
-<p class="text-xs text-red-500 font-medium">Próximo Martes 16/06</p>
-<p class="text-sm font-semibold text-slate-800">Parcial 1: Arq. y Diseño de Interfaces</p>
-</div>
-</div>
-</article>
-<main class="grid grid-cols-2 gap-4">
-<div onclick="document.getElementById('btn-nav-apuntes').click()" class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between h-28 cursor-pointer hover:border-blue-300 active:scale-95 transition-all">
-<span class="material-symbols-outlined text-blue-600 text-2xl">menu_book</span>
-<div>
-<p class="text-2xl font-bold text-slate-900">12</p>
-<p class="text-xs text-slate-500 font-medium">Apuntes disponibles</p>
-</div>
-</div>
-<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between h-28 opacity-80">
-<span class="material-symbols-outlined text-emerald-600 text-2xl">event_upcoming</span>
-<div>
-<p class="text-2xl font-bold text-slate-900">3</p>
-<p class="text-xs text-slate-500 font-medium">Fechas en agenda</p>
-</div>
-</div>
-</main>
-</section>
-<section id="pantalla-apuntes" class="p-4 max-w-md mx-auto space-y-5 hidden">
-<header class="pt-4">
-<h1 class="text-2xl font-bold text-slate-900">Repositorio de Apuntes</h1>
-<p class="text-xs text-slate-500">Buscá y descargá el material didáctico de la carrera.</p>
-</header>
+<!-- Se ajusta el padding: inferior en móvil (pb-24), superior en PC (md:pt-24) -->
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24 md:pb-8 md:pt-24 select-none">
+    
+    <!-- NAVEGACIÓN: Inferior en móvil, Superior y expandida en PC -->
+    <nav class="fixed bottom-0 md:top-0 md:bottom-auto left-0 right-0 bg-white border-t md:border-t-0 md:border-b border-slate-200 shadow-xl md:shadow-sm px-6 py-2 md:py-4 flex justify-around md:justify-center md:gap-12 w-full z-50">
+        <button data-target="pantalla-home" class="nav-btn text-blue-600 flex flex-col md:flex-row items-center font-medium text-xs md:text-sm space-y-0.5 md:space-y-0 md:space-x-2 transition-all">
+            <span class="material-symbols-outlined text-2xl font-light">home</span><span>Inicio</span>
+        </button>
+        <button data-target="pantalla-apuntes" class="nav-btn text-slate-400 flex flex-col md:flex-row items-center font-medium text-xs md:text-sm space-y-0.5 md:space-y-0 md:space-x-2 transition-all">
+            <span class="material-symbols-outlined text-2xl font-light">menu_book</span><span>Apuntes</span>
+        </button>
+        <button data-target="pantalla-calendario" class="nav-btn text-slate-400 flex flex-col md:flex-row items-center font-medium text-xs md:text-sm space-y-0.5 md:space-y-0 md:space-x-2 transition-all">
+            <span class="material-symbols-outlined text-2xl font-light">calendar_month</span><span>Calendario</span>
+        </button>
+    </nav>
 
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3 text-slate-400 text-xl">search</span>
-<input type="text" placeholder="Buscar apuntes, temas, autores..."
-class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 shadow-sm transition-all">
-</div>
-<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar snap-x">
-<button onclick="filtrarMateria('todos', this)" class="px-4 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-full shadow-sm whitespace-nowrap snap-inner filter-pill transition-all">Todos</button>
-<button onclick="filtrarMateria('interfaces', this)" class="px-4 py-1.5 bg-white text-slate-600 border border-slate-200 text-xs font-medium rounded-full hover:bg-slate-50 whitespace-nowrap snap-inner filter-pill transition-all">Interfaces</button>
-<button onclick="filtrarMateria('bd', this)" class="px-4 py-1.5 bg-white text-slate-600 border border-slate-200 text-xs font-medium rounded-full hover:bg-slate-50 whitespace-nowrap snap-inner filter-pill transition-all">Base de Datos</button>
-<button onclick="filtrarMateria('ingles', this)" class="px-4 py-1.5 bg-white text-slate-600 border border-slate-200 text-xs font-medium rounded-full hover:bg-slate-50 whitespace-nowrap snap-inner filter-pill transition-all">Inglés</button>
-</div>
-<div class="space-y-3">
-<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between gap-4 card-apunte" data-materia="interfaces">
-<div class="space-y-1 min-w-0 flex-1">
-<span class="inline-block px-2 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase rounded tracking-wide">Interfaces</span>
-<h3 class="font-semibold text-sm text-slate-800 line-clamp-1">Patrones de Diseño UI y UX Móvil</h3>
-<p class="text-xs text-slate-400 flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">person</span> Prof. M. Belgrano
-</p>
-</div>
-<button class="p-2.5 bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-600 active:scale-90 rounded-xl transition-all border border-slate-100 flex-shrink-0">
-<span class="material-symbols-outlined text-xl">download</span>
-</button>
-</div>
-<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between gap-4 card-apunte" data-materia="bd">
-<div class="space-y-1 min-w-0 flex-1">
-<span class="inline-block px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase rounded tracking-wide">Base de Datos</span>
-<h3 class="font-semibold text-sm text-slate-800 line-clamp-1">Normalización y Reglas de Negocio: 1FN a 3FN</h3>
-<p class="text-xs text-slate-400 flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">person</span> Ing. G. Villaro
-</p>
-</div>
-<button class="p-2.5 bg-slate-50 text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 active:scale-90 rounded-xl transition-all border border-slate-100 flex-shrink-0">
-<span class="material-symbols-outlined text-xl">download</span>
-</button>
-</div>
-<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between gap-4 card-apunte" data-materia="ingles">
-<div class="space-y-1 min-w-0 flex-1">
-<span class="inline-block px-2 py-0.5 bg-amber-50 text-amber-600 text-[10px] font-bold uppercase rounded tracking-wide">Inglés</span>
-<h3 class="font-semibold text-sm text-slate-800 line-clamp-1">Technical English for SysAdmins & Devs</h3>
-<p class="text-xs text-slate-400 flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">person</span> Lic. J. Gómez
-</p>
-</div>
-<button class="p-2.5 bg-slate-50 text-slate-700 hover:bg-amber-50 hover:text-amber-600 active:scale-90 rounded-xl transition-all border border-slate-100 flex-shrink-0">
-<span class="material-symbols-outlined text-xl">download</span>
-</button>
-</div>
-<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between gap-4 card-apunte" data-materia="interfaces">
-<div class="space-y-1 min-w-0 flex-1">
-<span class="inline-block px-2 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase rounded tracking-wide">Interfaces</span>
-<h3 class="font-semibold text-sm text-slate-800 line-clamp-1">Guía Esencial de Utilidades Tailwind CSS</h3>
-<p class="text-xs text-slate-400 flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">person</span> Comunidad Dev
-</p>
-</div>
-<button class="p-2.5 bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-600 active:scale-90 rounded-xl transition-all border border-slate-100 flex-shrink-0">
-<span class="material-symbols-outlined text-xl">download</span>
-</button>
-</div>
-</div>
-</section>
-<section id="pantalla-calendario" class="p-4 max-w-md mx-auto space-y-4 hidden">
-
-    <header class="pt-4">
-        <h1 class="text-2xl font-bold text-slate-900">Calendario de Exámenes</h1>
-        <p class="text-xs text-slate-500">Cronograma ordenado de entregas y parciales.</p>
-    </header>
-
-    <div class="space-y-4">
-
-        <!-- JUNIO -->
-
-        <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-slate-300"></div>
-            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">
-                Junio 2026
-            </span>
-            <div class="h-px flex-1 bg-slate-300"></div>
-        </div>
-
-        <!-- Tarjeta 1 -->
-
-        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
-
-            <div class="flex gap-4">
-
-                <div class="text-center min-w-[60px]">
-                    <p class="text-xs text-slate-500 uppercase">Jun</p>
-                    <p class="text-3xl font-bold text-slate-900">16</p>
-                </div>
-
-                <div class="flex-1">
-                    <span class="inline-block bg-red-100 text-red-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
-                        Parcial
-                    </span>
-
-                    <h3 class="font-semibold text-slate-900">
-                        Arquitectura y Diseño de Interfaces
-                    </h3>
-
-                    <p class="mt-1 text-xs text-slate-500">
-                        🕘 09:00 hs • Sala de Computacion
-                    </p>
-                </div>
-
+    <!-- PANTALLA HOME: Se expande el contenedor principal -->
+    <section id="pantalla-home" class="p-4 max-w-md md:max-w-4xl lg:max-w-5xl mx-auto space-y-6 md:space-y-8">
+        <header class="flex items-center justify-between pt-4 md:pt-0">
+            <div>
+                <span class="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-wider">¡Hola, desarrollador!</span>
+                <h1 class="text-2xl md:text-4xl font-bold text-slate-900">StudyHub Belgrano</h1>
             </div>
-
-        </div>
-
-        <!-- Tarjeta 2 -->
-
-        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
-
-            <div class="flex gap-4">
-
-                <div class="text-center min-w-[60px]">
-                    <p class="text-xs text-slate-500 uppercase">Jun</p>
-                    <p class="text-3xl font-bold text-slate-900">23</p>
-                </div>
-
-                <div class="flex-1">
-                    <span class="inline-block bg-orange-100 text-orange-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
-                        TP
-                    </span>
-
-                    <h3 class="font-semibold text-slate-900">
-                        Entrega Proyecto Integrador
-                    </h3>
-
-                    <p class="mt-1 text-xs text-slate-500">
-                        🕘 23:59 hs • Campus Virtual
-                    </p>
-                </div>
-
+            <span class="material-symbols-outlined text-slate-700 text-3xl md:text-5xl">account_circle</span>
+        </header>
+        <article class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 space-y-3">
+            <div class="flex items-center gap-2 text-red-600">
+                <span class="material-symbols-outlined text-xl md:text-2xl">notification_important</span>
+                <h2 class="font-semibold text-sm md:text-base uppercase tracking-wide">Alertas importantes</h2>
             </div>
-
-        </div>
-
-        <!-- JULIO -->
-
-        <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-slate-300"></div>
-            <span class="text-xs font-bold uppercase tracking-widest text-slate-500">
-                Julio 2026
-            </span>
-            <div class="h-px flex-1 bg-slate-300"></div>
-        </div>
-
-        <!-- Tarjeta 3 -->
-
-        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
-
-            <div class="flex gap-4">
-
-                <div class="text-center min-w-[60px]">
-                    <p class="text-xs text-slate-500 uppercase">Jul</p>
-                    <p class="text-3xl font-bold text-slate-900">03</p>
+            <div class="space-y-2">
+                <div class="p-3 md:p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
+                    <p class="text-xs md:text-sm text-red-500 font-medium">Próximo Martes 16/06</p>
+                    <p class="text-sm md:text-lg font-semibold text-slate-800">Parcial 1: Arq. y Diseño de Interfaces</p>
                 </div>
-
-                <div class="flex-1">
-                    <span class="inline-block bg-emerald-100 text-emerald-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
-                        Final
-                    </span>
-
-                    <h3 class="font-semibold text-slate-900">
-                        Inglés Técnico
-                    </h3>
-
-                    <p class="mt-1 text-xs text-slate-500">
-                        🕘 18:30 hs • Aula 3
-                    </p>
-                </div>
-
             </div>
-
-        </div>
-
-        <!-- Tarjeta 4 -->
-
-        <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
-
-            <div class="flex gap-4">
-
-                <div class="text-center min-w-[60px]">
-                    <p class="text-xs text-slate-500 uppercase">Jul</p>
-                    <p class="text-3xl font-bold text-slate-900">11</p>
+        </article>
+        <main class="grid grid-cols-2 gap-4 md:gap-8">
+            <div data-target="pantalla-apuntes" class="nav-trigger bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between h-28 md:h-36 cursor-pointer hover:border-blue-300">
+                <span class="material-symbols-outlined text-blue-600 text-2xl md:text-4xl">menu_book</span>
+                <div>
+                    <p class="text-2xl md:text-3xl font-bold text-slate-900" id="contador-apuntes">0</p>
+                    <p class="text-xs md:text-sm text-slate-500 font-medium">Apuntes</p>
                 </div>
-
-                <div class="flex-1">
-                    <span class="inline-block bg-red-100 text-red-600 text-[10px] font-bold uppercase px-2 py-1 rounded-full mb-2">
-                        Parcial
-                    </span>
-
-                    <h3 class="font-semibold text-slate-900">
-                        Base de Datos
-                    </h3>
-
-                    <p class="mt-1 text-xs text-slate-500">
-                        🕘 10:00 hs • Aula 3
-                    </p>
-                </div>
-
             </div>
+            <div data-target="pantalla-calendario" class="nav-trigger bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between h-28 md:h-36 cursor-pointer hover:border-blue-300">
+                <span class="material-symbols-outlined text-emerald-600 text-2xl md:text-4xl">event_upcoming</span>
+                <div>
+                    <p class="text-2xl md:text-3xl font-bold text-slate-900">3</p>
+                    <p class="text-xs md:text-sm text-slate-500 font-medium">Agenda</p>
+                </div>
+            </div>
+        </main>
+    </section>
 
+    <!-- PANTALLA APUNTES -->
+    <section id="pantalla-apuntes" class="p-4 max-w-md md:max-w-4xl lg:max-w-6xl mx-auto space-y-5 hidden">
+        <header class="pt-4 md:pt-0">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Repositorio</h1>
+        </header>
+        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar snap-x md:flex-wrap" id="contenedor-filtros">
+            <!-- Filtros JS -->
         </div>
+        <!-- Se convierte en grilla de varias columnas en PC -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4" id="contenedor-apuntes">
+            <!-- Tarjetas JS -->
+        </div>
+    </section>
 
-    </div>
+    <!-- PANTALLA CALENDARIO -->
+    <section id="pantalla-calendario" class="p-4 max-w-md md:max-w-3xl mx-auto space-y-4 hidden">
+        <header class="pt-4 md:pt-0">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Calendario</h1>
+        </header>
+        <!-- Grilla de eventos en PC -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="contenedor-calendario">
+            <!-- Eventos JS -->
+        </div>
+    </section>
 
-</section>
-<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-xl px-6 py-2 flex justify-around max-w-md mx-auto z-50">
-<button onclick="navegarA('pantalla-home', this)" class="flex flex-col items-center text-blue-600 font-medium text-xs space-y-0.5 nav-btn flex-1">
-<span class="material-symbols-outlined text-2xl font-light">home</span>
-<span>Inicio</span>
-</button>
-<button id="btn-nav-apuntes" onclick="navegarA('pantalla-apuntes', this)" class="flex flex-col items-center text-slate-400 hover:text-slate-600 font-medium text-xs space-y-0.5 nav-btn flex-1">
-<span class="material-symbols-outlined text-2xl font-light">menu_book</span>
-<span>Apuntes</span>
-</button>
-<button onclick="navegarA('pantalla-calendario', this)" class="flex flex-col items-center text-slate-400 hover:text-slate-600 font-medium text-xs space-y-0.5 nav-btn flex-1">
-<span class="material-symbols-outlined text-2xl font-light">calendar_month</span>
-<span>Calendario</span>
-</button>
-</nav>
-<script>
-// Enrutador simple de pantallas
-function navegarA(idPantalla, botonActivo) {
-document.getElementById('pantalla-home').classList.add('hidden');
-document.getElementById('pantalla-apuntes').classList.add('hidden');
-document.getElementById('pantalla-calendario').classList.add('hidden');
-
-document.getElementById(idPantalla).classList.remove('hidden');
-
-const botones = document.querySelectorAll('.nav-btn');
-botones.forEach(btn => {
-btn.classList.remove('text-blue-600');
-btn.classList.add('text-slate-400');
-});
-
-botonActivo.classList.remove('text-slate-400');
-botonActivo.classList.add('text-blue-600');
-window.scrollTo(0, 0); // Resetea scroll superior al cambiar de sección
-}
-// Filtros reactivos por asignaturas
-function filtrarMateria(materia, botonActivo) {
-const píldoras = document.querySelectorAll('.filter-pill');
-píldoras.forEach(btn => {
-btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
-btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'font-medium');
-});
-botonActivo.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'font-medium');
-botonActivo.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-semibold');
-const tarjetas = document.querySelectorAll('.card-apunte');
-tarjetas.forEach(tarjeta => {
-if (materia === 'todos' || tarjeta.getAttribute('data-materia') === materia) {
-tarjeta.classList.remove('hidden');
-} else {
-tarjeta.classList.add('hidden');
-}
-});
-}
-</script>
+    <script src="js/modelo.js"></script>
+    <script src="js/vista.js"></script>
+    <script src="js/controlador.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
