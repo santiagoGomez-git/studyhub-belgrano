@@ -1,37 +1,71 @@
 class Modelo {
     constructor() {
         this.apuntes = [
-            { id: 1, categoria: 'interfaces', badge: 'Interfaces', titulo: 'Patrones de Diseño UI y UX Móvil', profesor: 'Prof. M. Belgrano', color: 'blue' },
-            { id: 2, categoria: 'bd', badge: 'Base de Datos', titulo: 'Normalización y Reglas de Negocio', profesor: 'Ing. G. Villaro', color: 'emerald' },
-            { id: 3, categoria: 'ingles', badge: 'Inglés', titulo: 'Technical English for SysAdmins', profesor: 'Lic. J. Gómez', color: 'amber' }
-        ];
+        { id: 1, categoria: 'interfaces', badge: 'Interfaces', titulo: 'Patrones de Diseño UI y UX Móvil', profesor: 'Prof. M. Belgrano', color: 'blue' },
+        { id: 2, categoria: 'bd', badge: 'Base de Datos', titulo: 'Normalización y Reglas de Negocio', profesor: 'Ing. G. Villaro', color: 'emerald' },
+        { id: 3, categoria: 'ingles', badge: 'Inglés', titulo: 'Technical English for SysAdmins', profesor: 'Lic. J. Gómez', color: 'amber' },
+        { id: 4, categoria: 'interfaces', badge: 'Interfaces', titulo: 'Heurísticas de Nielsen', profesor: 'Prof. M. Belgrano', color: 'blue' },
+        { id: 5, categoria: 'bd', badge: 'Base de Datos', titulo: 'Consultas SQL Avanzadas', profesor: 'Ing. G. Villaro', color: 'emerald' },
+        { id: 6, categoria: 'ingles', badge: 'Inglés', titulo: 'Tech Vocabulary Glossary', profesor: 'Lic. J. Gómez', color: 'amber' }
+    ];
 
-        // NUEVO: Array de categorías para los filtros
         this.categorias = [
             { id: 'todos', label: 'Todos' },
+            { id: 'favoritos', label: '⭐ Favoritos' },
             { id: 'interfaces', label: 'Interfaces' },
             { id: 'bd', label: 'Base de Datos' },
             { id: 'ingles', label: 'Inglés' }
         ];
 
-        // NUEVO: Array de eventos para el calendario
-        this.eventos = [
-            { id: 1, mesStr: 'Jun', dia: '16', tipo: 'Parcial', materia: 'Arquitectura y Diseño de Interfaces', detalle: '🕘 09:00 hs • Sala de Computacion', color: 'red' },
-            { id: 2, mesStr: 'Jun', dia: '23', tipo: 'TP', materia: 'Entrega Proyecto Integrador', detalle: '🕘 23:59 hs • Campus Virtual', color: 'orange' },
-            { id: 3, mesStr: 'Jul', dia: '03', tipo: 'Final', materia: 'Inglés Técnico', detalle: '🕘 18:30 hs • Aula 3', color: 'emerald' },
-            { id: 4, mesStr: 'Jul', dia: '11', tipo: 'Parcial', materia: 'Base de Datos', detalle: '🕘 10:00 hs • Aula 3', color: 'red' }
-        ];
+        // REEMPLAZO: Lógica con LocalStorage y fechas reales para el calendario
+        const eventosGuardados = JSON.parse(localStorage.getItem('studyhub_eventos'));
+        if (eventosGuardados && eventosGuardados.length > 0) {
+            this.eventos = eventosGuardados;
+        } else {
+            this.eventos = [
+                { id: 1, fecha: '2026-10-29', mesStr: 'Oct', dia: '29', tipo: 'Parcial', materia: 'Arq. y Diseño de Interfaces', detalle: 'Examen Parcial Nro 2', color: 'red' }
+            ];
+            localStorage.setItem('studyhub_eventos', JSON.stringify(this.eventos));
+        }
+
+        this.favoritos = JSON.parse(localStorage.getItem('studyhub_favoritos')) || [];
     }
 
-    // Métodos existentes...
     obtenerTodosLosApuntes() { return this.apuntes; }
     obtenerApuntesPorCategoria(categoria) {
         if (categoria === 'todos') return this.apuntes;
+        if (categoria === 'favoritos') return this.apuntes.filter(apunte => this.favoritos.includes(apunte.id));
         return this.apuntes.filter(apunte => apunte.categoria === categoria);
     }
     obtenerCantidadApuntes() { return this.apuntes.length; }
 
-    // NUEVOS MÉTODOS:
     obtenerCategorias() { return this.categorias; }
     obtenerEventos() { return this.eventos; }
+
+    obtenerFavoritos() {
+        return this.favoritos;
+    }
+
+    toggleFavorito(id) {
+        const index = this.favoritos.indexOf(id);
+        if (index === -1) {
+            this.favoritos.push(id); // (Create)
+        } else {
+            this.favoritos.splice(index, 1); // (Delete)
+        }
+        // Persistir en memoria (Update)
+        localStorage.setItem('studyhub_favoritos', JSON.stringify(this.favoritos));
+    }
+
+    // NUEVO MÉTODO PARA EL CRUD DEL CALENDARIO:
+    agregarEvento(nuevoEvento) {
+        nuevoEvento.id = Date.now();
+        this.eventos.push(nuevoEvento);
+        localStorage.setItem('studyhub_eventos', JSON.stringify(this.eventos));
+    }
+
+    eliminarEvento(id) {
+        this.eventos = this.eventos.filter(e => e.id !== id);
+        localStorage.setItem('studyhub_eventos', JSON.stringify(this.eventos));
+    }
 }

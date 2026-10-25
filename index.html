@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyHub Belgrano - MVC & Responsive</title>
+    <title>StudyHub Belgrano - Prototipo Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,84 +13,103 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<!-- Se ajusta el padding: inferior en móvil (pb-24), superior en PC (md:pt-24) -->
-<body class="bg-slate-50 text-slate-900 min-h-screen pb-24 md:pb-8 md:pt-24 select-none">
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-24 md:pb-12 md:pt-28 select-none">
     
-    <!-- NAVEGACIÓN: Inferior en móvil, Superior y expandida en PC -->
-    <nav class="fixed bottom-0 md:top-0 md:bottom-auto left-0 right-0 bg-white border-t md:border-t-0 md:border-b border-slate-200 shadow-xl md:shadow-sm px-6 py-2 md:py-4 flex justify-around md:justify-center md:gap-12 w-full z-50">
-        <button data-target="pantalla-home" class="nav-btn text-blue-600 flex flex-col md:flex-row items-center font-medium text-xs md:text-sm space-y-0.5 md:space-y-0 md:space-x-2 transition-all">
-            <span class="material-symbols-outlined text-2xl font-light">home</span><span>Inicio</span>
-        </button>
-        <button data-target="pantalla-apuntes" class="nav-btn text-slate-400 flex flex-col md:flex-row items-center font-medium text-xs md:text-sm space-y-0.5 md:space-y-0 md:space-x-2 transition-all">
-            <span class="material-symbols-outlined text-2xl font-light">menu_book</span><span>Apuntes</span>
-        </button>
-        <button data-target="pantalla-calendario" class="nav-btn text-slate-400 flex flex-col md:flex-row items-center font-medium text-xs md:text-sm space-y-0.5 md:space-y-0 md:space-x-2 transition-all">
-            <span class="material-symbols-outlined text-2xl font-light">calendar_month</span><span>Calendario</span>
-        </button>
+    <!-- NAVEGACIÓN SUPERIOR CON SELECTOR DE ROL -->
+    <nav class="fixed bottom-0 md:top-0 md:bottom-auto left-0 right-0 bg-white border-t md:border-t-0 md:border-b border-slate-200 shadow-xl md:shadow-sm px-6 py-2 md:py-3 flex justify-between items-center w-full z-50">
+        <!-- Botones de navegación (ahora alineados a la izquierda en PC) -->
+        <div class="flex justify-around md:justify-start md:gap-8 w-full md:w-auto">
+            <button data-target="pantalla-home" class="nav-btn text-blue-600 flex flex-col md:flex-row items-center font-medium text-xs md:text-base space-y-0.5 md:space-y-0 md:space-x-2 hover:bg-slate-50 md:px-4 md:py-2 md:rounded-lg transition-all">
+                <span class="material-symbols-outlined text-2xl md:text-3xl font-light">home</span><span>Inicio</span>
+            </button>
+            <button data-target="pantalla-apuntes" class="nav-btn text-slate-400 flex flex-col md:flex-row items-center font-medium text-xs md:text-base space-y-0.5 md:space-y-0 md:space-x-2 hover:bg-slate-50 md:px-4 md:py-2 md:rounded-lg transition-all">
+                <span class="material-symbols-outlined text-2xl md:text-3xl font-light">menu_book</span><span>Apuntes</span>
+            </button>
+            <button data-target="pantalla-calendario" class="nav-btn text-slate-400 flex flex-col md:flex-row items-center font-medium text-xs md:text-base space-y-0.5 md:space-y-0 md:space-x-2 hover:bg-slate-50 md:px-4 md:py-2 md:rounded-lg transition-all">
+                <span class="material-symbols-outlined text-2xl md:text-3xl font-light">calendar_month</span><span>Calendario</span>
+            </button>
+        </div>
+        
+        <!-- Selector Global de Roles (Solo visible en PC para no romper el móvil) -->
+        <div class="hidden md:flex items-center gap-3 border-l border-slate-200 pl-6">
+            <span class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Perfil Activo:</span>
+            <select id="selector-rol-global" class="bg-slate-50 border border-slate-200 text-sm rounded-lg px-3 py-1.5 outline-none cursor-pointer font-medium text-slate-700">
+                <option value="estudiante">👨‍🎓 Alumno</option>
+                <option value="profesor">👨‍🏫 Profesor / Admin</option>
+            </select>
+        </div>
     </nav>
-
-    <!-- PANTALLA HOME: Se expande el contenedor principal -->
-    <section id="pantalla-home" class="p-4 max-w-md md:max-w-4xl lg:max-w-5xl mx-auto space-y-6 md:space-y-8">
+    <!-- PANTALLA HOME -->
+    <section id="pantalla-home" class="p-4 w-full xl:w-9/12 mx-auto space-y-6 md:space-y-10">
         <header class="flex items-center justify-between pt-4 md:pt-0">
-            <div>
-                <span class="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-wider">¡Hola, desarrollador!</span>
-                <h1 class="text-2xl md:text-4xl font-bold text-slate-900">StudyHub Belgrano</h1>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-md">
+                    <span class="material-symbols-outlined text-3xl md:text-4xl">school</span>
+                </div>
+                <div>
+                    <span class="text-xs md:text-base font-semibold text-blue-600 uppercase tracking-wider">¡Hola, Santiago Gomez!</span>
+                    <h1 class="text-2xl md:text-5xl font-bold text-slate-900 mt-1">StudyHub Belgrano</h1>
+                </div>
             </div>
-            <span class="material-symbols-outlined text-slate-700 text-3xl md:text-5xl">account_circle</span>
         </header>
-        <article class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 space-y-3">
-            <div class="flex items-center gap-2 text-red-600">
-                <span class="material-symbols-outlined text-xl md:text-2xl">notification_important</span>
-                <h2 class="font-semibold text-sm md:text-base uppercase tracking-wide">Alertas importantes</h2>
+        
+        <article class="bg-white p-4 md:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+            <div class="flex items-center gap-2 text-slate-800">
+                <span class="material-symbols-outlined text-xl md:text-3xl">notification_important</span>
+                <h2 class="font-semibold text-sm md:text-xl uppercase tracking-wide">Próximos Eventos</h2>
             </div>
-            <div class="space-y-2">
-                <div class="p-3 md:p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
-                    <p class="text-xs md:text-sm text-red-500 font-medium">Próximo Martes 16/06</p>
-                    <p class="text-sm md:text-lg font-semibold text-slate-800">Parcial 1: Arq. y Diseño de Interfaces</p>
-                </div>
-            </div>
+            <div class="space-y-3" id="contenedor-alertas"></div>
         </article>
+
         <main class="grid grid-cols-2 gap-4 md:gap-8">
-            <div data-target="pantalla-apuntes" class="nav-trigger bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between h-28 md:h-36 cursor-pointer hover:border-blue-300">
-                <span class="material-symbols-outlined text-blue-600 text-2xl md:text-4xl">menu_book</span>
+            <div data-target="pantalla-apuntes" class="nav-trigger bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-blue-400 hover:shadow-md transition-all">
+                <span class="material-symbols-outlined text-blue-600 text-3xl md:text-5xl">menu_book</span>
                 <div>
-                    <p class="text-2xl md:text-3xl font-bold text-slate-900" id="contador-apuntes">0</p>
-                    <p class="text-xs md:text-sm text-slate-500 font-medium">Apuntes</p>
+                    <p class="text-3xl md:text-5xl font-bold text-slate-900" id="contador-apuntes">0</p>
+                    <p class="text-xs md:text-lg text-slate-500 font-medium mt-1">Apuntes disponibles</p>
                 </div>
             </div>
-            <div data-target="pantalla-calendario" class="nav-trigger bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between h-28 md:h-36 cursor-pointer hover:border-blue-300">
-                <span class="material-symbols-outlined text-emerald-600 text-2xl md:text-4xl">event_upcoming</span>
+            <div data-target="pantalla-calendario" class="nav-trigger bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-emerald-400 hover:shadow-md transition-all">
+                <span class="material-symbols-outlined text-emerald-600 text-3xl md:text-5xl">event_upcoming</span>
                 <div>
-                    <p class="text-2xl md:text-3xl font-bold text-slate-900">3</p>
-                    <p class="text-xs md:text-sm text-slate-500 font-medium">Agenda</p>
+                    <p class="text-3xl md:text-5xl font-bold text-slate-900">Agenda</p>
+                    <p class="text-xs md:text-lg text-slate-500 font-medium mt-1">Ver calendario completo</p>
                 </div>
             </div>
         </main>
     </section>
 
     <!-- PANTALLA APUNTES -->
-    <section id="pantalla-apuntes" class="p-4 max-w-md md:max-w-4xl lg:max-w-6xl mx-auto space-y-5 hidden">
+    <section id="pantalla-apuntes" class="p-4 w-full xl:w-9/12 mx-auto space-y-5 md:space-y-8 hidden">
         <header class="pt-4 md:pt-0">
-            <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Repositorio</h1>
+            <h1 class="text-2xl md:text-4xl font-bold text-slate-900">Repositorio</h1>
+            <p class="text-xs md:text-base text-slate-500 mt-2">Buscá y descargá el material didáctico de la carrera.</p>
         </header>
-        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar snap-x md:flex-wrap" id="contenedor-filtros">
-            <!-- Filtros JS -->
-        </div>
-        <!-- Se convierte en grilla de varias columnas en PC -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4" id="contenedor-apuntes">
-            <!-- Tarjetas JS -->
-        </div>
+        <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar snap-x md:flex-wrap" id="contenedor-filtros"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6" id="contenedor-apuntes"></div>
     </section>
 
     <!-- PANTALLA CALENDARIO -->
-    <section id="pantalla-calendario" class="p-4 max-w-md md:max-w-3xl mx-auto space-y-4 hidden">
+    <section id="pantalla-calendario" class="p-4 w-full xl:w-9/12 mx-auto space-y-5 md:space-y-8 hidden">
         <header class="pt-4 md:pt-0">
-            <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Calendario</h1>
+            <h1 class="text-2xl md:text-4xl font-bold text-slate-900">Calendario Académico</h1>
         </header>
-        <!-- Grilla de eventos en PC -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="contenedor-calendario">
-            <!-- Eventos JS -->
-        </div>
+
+        <form id="form-evento" class="bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-slate-100 space-y-4 flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
+            <div class="flex-1 space-y-2">
+                <label class="text-xs md:text-sm font-semibold text-slate-500 uppercase tracking-wide">Materia o Evaluación</label>
+                <input type="text" id="input-materia" placeholder="Ej: Trabajo Práctico 2" required class="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm md:text-base focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="w-full md:w-56 space-y-2">
+                <label class="text-xs md:text-sm font-semibold text-slate-500 uppercase tracking-wide">Fecha exacta</label>
+                <input type="date" id="input-fecha" required class="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm md:text-base focus:outline-none focus:border-blue-500">
+            </div>
+            <button type="submit" class="w-full md:w-auto text-white px-8 py-3 rounded-xl text-sm md:text-base font-semibold shadow-md hover:shadow-lg transition-all active:scale-95 bg-blue-600 hover:bg-blue-700">
+                Guardar Evento
+            </button>
+        </form>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6" id="contenedor-calendario"></div>
     </section>
 
     <script src="js/modelo.js"></script>
